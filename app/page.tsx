@@ -32,11 +32,6 @@ export default async function Home() {
                 Get Started Free
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="text-base">
-              <Link href="/sign-in">
-                Sign In
-              </Link>
-            </Button>
           </div>
         </div>
       </section>
