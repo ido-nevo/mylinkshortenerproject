@@ -1,3 +1,7 @@
+---
+description: read this before creating or modifying UI components in the project.
+---
+
 # UI Components Guide
 
 This guide covers UI component usage with shadcn/ui in the link shortener project.
