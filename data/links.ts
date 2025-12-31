@@ -55,3 +55,13 @@ export async function checkShortCodeExists(shortCode: string, excludeId?: number
   
   return !!existing;
 }
+
+export async function getLinkByShortCode(shortCode: string) {
+  const [link] = await db
+    .select()
+    .from(linksTable)
+    .where(eq(linksTable.shortCode, shortCode))
+    .limit(1);
+  
+  return link;
+}
