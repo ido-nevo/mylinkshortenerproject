@@ -34,7 +34,10 @@ export function CreateLinkDialog() {
     const url = formData.get('url') as string;
     const shortCode = formData.get('shortCode') as string;
 
-    const result = await createLinkAction({ url, shortCode });
+    const result = await createLinkAction({ 
+      url, 
+      ...(shortCode && { shortCode })
+    });
 
     if (result.error) {
       if (result.details) {
@@ -60,7 +63,7 @@ export function CreateLinkDialog() {
         <DialogHeader>
           <DialogTitle>Create Short Link</DialogTitle>
           <DialogDescription>
-            Enter the URL you want to shorten and choose a custom short code.
+            Enter the URL you want to shorten. Optionally choose a custom short code, or one will be generated from the domain.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -80,16 +83,15 @@ export function CreateLinkDialog() {
               )}
             </div>
             <div className="space-y-2">
-              <Label htmlFor="shortCode">Short Code</Label>
+              <Label htmlFor="shortCode">Short Code (optional)</Label>
               <Input
                 id="shortCode"
                 name="shortCode"
                 placeholder="my-link"
-                required
                 disabled={isLoading}
               />
               <p className="text-xs text-muted-foreground">
-                3-20 characters: letters, numbers, hyphens, and underscores only
+                Leave empty to auto-generate from URL domain. Or use 3-20 characters: letters, numbers, hyphens, and underscores only
               </p>
               {errors.shortCode && (
                 <p className="text-sm text-destructive">{errors.shortCode[0]}</p>
